@@ -8,6 +8,7 @@ class Cell
             return false
         else
             return true
+        end
     end
 
     def addPiece(Piece piece)
