@@ -12,6 +12,6 @@ class Piece
     end
 
     def getOwner
-        return owner
+        return @owner
     end
 end

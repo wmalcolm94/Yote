@@ -16,6 +16,6 @@ class Cell
     end
 
     def getPiece
-        return piece
+        return @piece
     end
 end
