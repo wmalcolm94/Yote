@@ -4,6 +4,7 @@ class Player
 
     def initialize(Board board)
         #what???
+        self.board = board
     end
 
     def takeTurn
