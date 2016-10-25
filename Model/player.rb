@@ -1,9 +1,9 @@
 class Player
-    board = nil
-    hand = nil
+    @board = nil
+    @hand = nil
 
     def initialize(Board board)
-        #what???
+        @board = board
     end
 
     def takeTurn
