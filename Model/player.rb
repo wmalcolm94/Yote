@@ -1,3 +1,6 @@
+require Board
+require hand
+
 class Player
     @board = nil
     @hand = nil

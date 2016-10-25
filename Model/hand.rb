@@ -1,3 +1,6 @@
+require Piece
+require Player
+
 class Hand
     pieces = []
 

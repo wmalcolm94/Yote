@@ -1,3 +1,5 @@
+require Piece
+
 class Cell
     @piece = nil
     def initialize
