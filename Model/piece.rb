@@ -1,11 +1,11 @@
 class Piece
-    @owner = nil
+    owner = nil
     def initialize(Player owner)
-        @owner = owner
+        owner = owner
     end
 
     def isOwner(Player player)
-        if player == @owner
+        if player == owner
             return true
         else 
             return false

@@ -1,10 +1,10 @@
 class Cell
-    @piece = nil
+    piece = nil
     def initialize
     end
     
     def isOccuppied
-        if @piece == nil
+        if piece == nil
             return false
         else
             return true
@@ -12,7 +12,7 @@ class Cell
     end
 
     def addPiece(Piece piece)
-        @piece = piece
+        piece = piece
     end
 
     def getPiece
