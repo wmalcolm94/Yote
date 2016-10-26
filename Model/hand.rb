@@ -11,7 +11,7 @@ class Hand
     end
 
     def removePiece 
-        #pieces.pop()
+        pieces.pop
     end
 
     def getCount
