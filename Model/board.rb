@@ -44,22 +44,29 @@ class Board
 
     #piece in this method is an instance of the piece class (clearly but you never know)
     def placePiece(dest_cell, piece)
-    
+        cells[dest_cell[0]][dest_cell[1]].addPiece(piece) 
     end
 
     def takePiece(dest_cell)
-    
+        #is this not redundant?
+        cells[dest_cell[0]][dest_cell[1]].removePiece()
     end
     #in this method owner is an instance of the player class
     def validateOwner(dest_cell,owner)
-    
+        temp = cells[dest_cell[0]][dest_cell[1]].getPiece()
+        temp.isOwner(player)
     end
 
     def printBoard
-    
+        #i think i need more info to write this 
     end
     #in this method owner is an instance of the Player class
     def countPlayerPieces(owner)
+        # well im pretty sure the design team is braindead.
+        # I dont think i can write this without clarification of the nature of player
+        # Maybe need new methods in player or does it really want me to call validateOwner
+        # like 4 dozen times and then how do i get at their hand
+        # Am i counting their hand or just the ones on the board
     
     end
 
