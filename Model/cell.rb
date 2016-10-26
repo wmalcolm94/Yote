@@ -14,7 +14,13 @@ class Cell
         @piece = piece
     end
 
+    def removePiece
+        temp = @piece
+        @piece = nil
+        temp
+    end
+
     def getPiece
-        return @piece
+        @piece
     end
 end
