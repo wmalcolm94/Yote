@@ -5,7 +5,7 @@ class Player
     @board = nil
     @hand = nil
 
-    def initialize(Board board)
+    def initialize(board)
         @board = board
     end
 

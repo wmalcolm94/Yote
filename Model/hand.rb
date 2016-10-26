@@ -4,7 +4,7 @@ require Player
 class Hand
     pieces = []
 
-    def initialize(Player owner)
+    def initialize(owner)
         for i in 0..12
             pieces[i] = Piece.new
         end

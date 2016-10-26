@@ -3,9 +3,6 @@ require Piece
 class Cell
     @piece = nil
     
-    def initialize
-    end
-    
     def isOccuppied
         @piece != nil
     end

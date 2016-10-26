@@ -2,11 +2,11 @@ require Player
 
 class Piece
     @owner = nil
-    def initialize(Player owner)
+    def initialize(owner)
         @owner = owner
     end
 
-    def isOwner(Player player)
+    def isOwner(player)
         player == @owner
     end
 
