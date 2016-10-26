@@ -11,10 +11,10 @@ class Hand
     end
 
     def removePiece 
-        #which piece do you remove???
+        #pieces.pop()
     end
 
     def getCount
-        return pieces.length
+        pieces.length
     end
 end

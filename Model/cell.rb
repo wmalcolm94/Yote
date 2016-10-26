@@ -2,18 +2,15 @@ require Piece
 
 class Cell
     @piece = nil
+    
     def initialize
     end
     
     def isOccuppied
-        if @piece == nil
-            return false
-        else
-            return true
-        end
+        @piece != nil
     end
 
-    def addPiece(Piece piece)
+    def addPiece(piece)
         @piece = piece
     end
 

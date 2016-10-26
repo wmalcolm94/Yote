@@ -7,13 +7,10 @@ class Piece
     end
 
     def isOwner(Player player)
-        if player == @owner
-            return true
-        else 
-            return false
+        player == @owner
     end
 
     def getOwner
-        return @owner
+        @owner
     end
 end
