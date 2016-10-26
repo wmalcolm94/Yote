@@ -1,10 +1,7 @@
-require Board
-require hand
+require_relative 'board'
+require_relative 'hand'
 
 class Player
-    @board = nil
-    @hand = nil
-
     def initialize(board)
         @board = board
     end

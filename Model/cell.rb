@@ -1,4 +1,4 @@
-require Piece
+require_relative 'piece'
 
 class Cell
     @piece = nil

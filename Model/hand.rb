@@ -1,5 +1,5 @@
-require Piece
-require Player
+require_relative 'piece'
+require_relative 'player'
 
 class Hand
     pieces = []

@@ -1,10 +1,10 @@
-require Cell
-require Player
-require Piece
+require_relative 'cell'
+require_relative 'player'
+require_relative 'piece'
 
 class Board
   
-    @cells = Cells[5][6]
+    @cells = Cell[5][6]
         
     #for all the following src_cell and dest_cell should be a integer array of size 2
     def jump(src_cell, dest_cell)
