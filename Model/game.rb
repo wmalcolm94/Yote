@@ -1,5 +1,5 @@
-include Player
-include Board
+require Player
+require Board
 
 class Game
     def initialize

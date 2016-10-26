@@ -1,3 +1,5 @@
+require Player
+
 class Piece
     @owner = nil
     def initialize(Player owner)
