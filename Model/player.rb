@@ -7,7 +7,8 @@ class Player
 
     def constructor(board)
         @board = board
-        @hand = Hand.new(self)
+        @hand = Hand.new
+        @hand.constructor(self)
     end
 
     def takeTurn

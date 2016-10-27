@@ -6,7 +6,8 @@ class Hand
 
     def constructor(owner)
         for i in 0..12
-            @pieces[i] = Piece.new(owner)
+            @pieces[i] = Piece.new
+            @pieces[i].constructor(owner)
         end
     end
 
