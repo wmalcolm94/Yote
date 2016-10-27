@@ -5,7 +5,7 @@ class Player
 	board = nil
 	hand = nil
 
-    def initialize(board)
+    def constructor(board)
         @board = board
         @hand = Hand.new(self)
     end
