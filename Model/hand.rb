@@ -6,15 +6,15 @@ class Hand
 
     def initialize(owner)
         for i in 0..12
-            pieces[i] = Piece.new
+            @pieces[i] = Piece.new(owner)
         end
     end
 
     def removePiece 
-        pieces.pop
+        @pieces.pop
     end
 
     def getCount
-        pieces.length
+        @pieces.length
     end
 end
