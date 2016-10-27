@@ -60,6 +60,7 @@ class Board
     def printBoard
         #i think i need more info to write this 
     end
+    
     #in this method owner is an instance of the Player class
     def countPlayerPieces(owner)
         # well im pretty sure the design team is braindead.
