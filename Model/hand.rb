@@ -4,7 +4,7 @@ require_relative 'player'
 class Hand
     pieces = []
 
-    def initialize(owner)
+    def constructor(owner)
         for i in 0..12
             @pieces[i] = Piece.new(owner)
         end
