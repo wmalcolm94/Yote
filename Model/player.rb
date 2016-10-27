@@ -41,8 +41,8 @@ class Player
 	    	end
     	end
     	
-    	input[0] = input[0].ord - 64
-    	input[1] = input[1].to_i
+    	input[0] = input[0].ord - 65
+    	input[1] = input[1].to_i - 1
     	input
     end
 end
