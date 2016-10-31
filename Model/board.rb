@@ -62,7 +62,8 @@ class Board
         #is this not redundant?
         cells[dest_cell[0]][dest_cell[1]].removePiece()
     end
-    #in this method owner is an instance of the player class
+   
+   #in this method owner is an instance of the player class
     def validateOwner(dest_cell,owner)
         temp = cells[dest_cell[0]][dest_cell[1]].getPiece()
         temp.isOwner(player)
@@ -70,17 +71,39 @@ class Board
 
     def printBoard
         #i think i need more info to write this 
+        cells.each_index do |x|
+            x.each_index do |y|
+                if(cells[x][y].isOccupied)
+                   temp = cells[x][y].getPiece()
+                   if(temp.isOwner(owner))#HELP I NEED AN OWNER
+                       puts '1'
+                   else
+                       puts '2'
+                   end
+                else
+                    puts "_"
+                end
+        end
     end
     
     #in this method owner is an instance of the Player class
     def countPlayerPieces(owner)
-        #There is No way to count pieces on the players hand
-        for i in cells[][]
-            for j in cells[][]
-                if(cells[i][j].getPiece
+        pieces = 0
+        cells.each_index do |x|
+            x.each_index do |y|
+                if(cells[x][y].isOccupied)
+                    temp=cells[x][y].getPiece()
+                    if(temp.isOwner(owner))
+                        pieces+=
+                    end
+                end
+            end
+        end
     end
 
+    
     private
+
     def getAdjacent(center)
         adjacent = [[center[0]-1,center[1]],[center[0]+1,center[1]],[center[0],center[1]-1],center[0],center[1]+1]
         adjacent
