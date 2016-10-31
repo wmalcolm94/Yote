@@ -23,6 +23,17 @@ class Board
     end
 
     def canJump( src_cell)
+        x_adjacent = [1,-1,0,0]
+        y_adjacent = [0,0,1,-1]
+
+        for i in x_adjacent.length
+            if(cells[src_cell[0] +x_adjacent[i]][src_cells[1]+ y_adjacent[i]].isOccupied)
+                if(cells[src_cells[0] +x_adjacent[i]+x_adjacent[i]][src_cells[1]+y_adjacent[i]+y_adjacent[i]])
+                    return true
+                end
+            end
+        end
+        return false
     end
 
     def canMove(src_cell)
@@ -39,7 +50,7 @@ class Board
     end
 
     def makeChoice(src_cell)
-    
+        #what a cluster fuck, what is the point of this    
     end
 
     #piece in this method is an instance of the piece class (clearly but you never know)
@@ -63,12 +74,10 @@ class Board
     
     #in this method owner is an instance of the Player class
     def countPlayerPieces(owner)
-        # well im pretty sure the design team is braindead.
-        # I dont think i can write this without clarification of the nature of player
-        # Maybe need new methods in player or does it really want me to call validateOwner
-        # like 4 dozen times and then how do i get at their hand
-        # Am i counting their hand or just the ones on the board
-    
+        #There is No way to count pieces on the players hand
+        for i in cells[][]
+            for j in cells[][]
+                if(cells[i][j].getPiece
     end
 
     private
