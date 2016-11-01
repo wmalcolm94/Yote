@@ -65,8 +65,7 @@ class Board
    
    #in this method owner is an instance of the player class
     def validateOwner(dest_cell, owner)
-        temp = cells[dest_cell[0]][dest_cell[1]].getPiece()
-        temp.isOwner(player)
+        cells[dest_cell[0]][dest_cell[1]].getPiece().isOwner(player)
     end
 
     def printBoard
