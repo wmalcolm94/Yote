@@ -15,14 +15,14 @@ class Board
     
     end
 
-    def move(src_cell,dest_cell)
+    def move(src_cell, dest_cell)
         
         temp = cells[src_cell[0][src_cell[1]]].removePiece()
         cells[dest_cell[0]][dest_cell[1]].addPiece(temp)
 
     end
 
-    def canJump( src_cell)
+    def canJump(src_cell)
         x_adjacent = [1,-1,0,0]
         y_adjacent = [0,0,1,-1]
 
@@ -64,7 +64,7 @@ class Board
     end
    
    #in this method owner is an instance of the player class
-    def validateOwner(dest_cell,owner)
+    def validateOwner(dest_cell, owner)
         temp = cells[dest_cell[0]][dest_cell[1]].getPiece()
         temp.isOwner(player)
     end
@@ -99,6 +99,7 @@ class Board
                 end
             end
         end
+        #somehow count player hand without being stupid
     end
 
     
