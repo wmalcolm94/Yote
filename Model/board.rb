@@ -74,11 +74,8 @@ class Board
             x.each_index do |y|
                 if(cells[x][y].isOccupied)
                    temp = cells[x][y].getPiece()
-                   if(temp.isOwner(owner))#HELP I NEED AN OWNER
-                       puts '1'
-                   else
-                       puts '2'
-                   end
+                   player = temp.getOwner()
+                   puts player.getSymbol()
                 else
                     puts "_"
                 end
@@ -99,6 +96,7 @@ class Board
             end
         end
         #somehow count player hand without being stupid
+        #you can go owner.getHandCount() :) !!
     end
 
     

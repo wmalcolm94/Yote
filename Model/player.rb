@@ -4,11 +4,21 @@ require_relative 'hand'
 class Player
 	board = nil
 	hand = nil
+    symbol = nil
 
-    def constructor(board)
+    def constructor(board, symbol)
         @board = board
         @hand = Hand.new
         @hand.constructor(self)
+        @symbol = symbol
+    end
+
+    def getSymbol
+        @symbol
+    end
+
+    def getHandCount
+        @hand.getCount()
     end
 
     def takeTurn
@@ -43,20 +53,18 @@ class Player
                         
                         dest_coords = selectCell()
                         dest_cell = @board.cells[dest_coords[0]][dest_coords[1]]
-
-                        #apparently make choice handles most of this
-                        #some private methods in board could do this
                         
                         if dest_cell.isOccupied()
                             puts "That cell is occupied!"
-                        elsif #not adjacent and not jump
-                            puts "That cell is too far away!"
-                        elsif #is jump
-                            #take piece
+                        elsif @board.canMove(src_coords, dest_coords)
+                            @board.jump(src_coords, dest_coords)
+                            #select a piece to take
+                            valid = true
+                        elsif @board.canMove(src_coords, dest_coords)
+                            @board.move(src_coords, dest_coords)
                             valid = true
                         else
-                            #move piece
-                            valid = true
+                            puts "That cell is too far away!"
                         end
 
                         @board.makeChoice()
