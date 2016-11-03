@@ -7,8 +7,8 @@ class Game
         @board = Board.new
         @player_1 = Player.new
         @player_2 = Player.new
-        @player_1.constructor(@board)
-        @player_2.constructor(@board)
+        @player_1.constructor(@board, 'X')
+        @player_2.constructor(@board, 'O')
     end
     
     def play

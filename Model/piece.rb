@@ -3,7 +3,7 @@ require_relative 'player'
 class Piece
     @owner = nil
     
-    def constructor(owner)
+    def initialize(owner)
         @owner = owner
     end
 

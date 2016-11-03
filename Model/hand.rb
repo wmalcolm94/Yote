@@ -2,12 +2,12 @@ require_relative 'piece'
 require_relative 'player'
 
 class Hand
-    pieces = []
+    pieces = nil
 
     def constructor(owner)
+        @pieces = Array.new(12)
         for i in 0..12
-            @pieces[i] = Piece.new
-            @pieces[i].constructor(owner)
+            @pieces[i] = Piece.new(owner)
         end
     end
 

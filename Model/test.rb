@@ -9,5 +9,5 @@ hand = Hand.new
 board = Board.new
 player = Player.new
 cell = Cell.new
-piece = Piece.new
+piece = Piece.new(player)
 game = Game.new
