@@ -22,21 +22,7 @@ class Player
     end
 
     def takeTurn
-    	#This method will be used to start a player’s turn. This will be called every time
-		#either player’s turn starts.
-		
-		#The player gets to choose their turn.
-		#Selecting an empty cell will automatically place a piece.
-		#Selecting a friendly occupied cell will transition into moving mode.
-		#The player has the choice of moving to an empty space or jumping over an
-		#enemy piece (if available).
-
-		#WTF?
-
-        #Take turn should prompt the user to act. This is where you should ask them to select a cell.
-        #You could also validate that this cell is either free or contains a piece belonging to the player.
-
-        flag = false
+    	flag = false
 
         puts "Enter which cell you wish to select: "
 
@@ -58,7 +44,22 @@ class Player
                             puts "That cell is occupied!"
                         elsif @board.canMove(src_coords, dest_coords)
                             @board.jump(src_coords, dest_coords)
-                            #select a piece to take
+                            take = false
+                            
+                            puts "Select which piece you'd like to take: "
+
+                            while !take
+                                take_coords = selectCell()
+                                take_cell = @board.cells[take_coords[0]][take_coords[1]]
+                                
+                                if take_cell.isOccupied() and !@board.validateOwner(take_coords, self)
+                                    @board.takePiece(take_coords)
+                                    take = true
+                                else
+                                    puts "No valid piece to take from that location."
+                                end
+                            end
+
                             valid = true
                         elsif @board.canMove(src_coords, dest_coords)
                             @board.move(src_coords, dest_coords)
