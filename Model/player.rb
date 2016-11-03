@@ -6,10 +6,9 @@ class Player
 	hand = nil
     symbol = nil
 
-    def constructor(board, symbol)
+    def initialize(board, symbol)
         @board = board
-        @hand = Hand.new
-        @hand.constructor(self)
+        @hand = Hand.new(self)
         @symbol = symbol
     end
 

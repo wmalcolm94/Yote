@@ -2,13 +2,16 @@ require_relative 'player'
 require_relative 'board'
 
 class Game
+    turn = 0
+    board = nil
+    player1 = nil
+    player2 = nil
+    
     def initialize
         @turn = 0
         @board = Board.new
-        @player_1 = Player.new
-        @player_2 = Player.new
-        @player_1.constructor(@board, 'X')
-        @player_2.constructor(@board, 'O')
+        @player_1 = Player.new(@board, 'O')
+        @player_2 = Player.new(@board, 'X')
     end
     
     def play
