@@ -84,19 +84,7 @@ class Board
     
     #in this method owner is an instance of the Player class
     def countPlayerPieces(owner)
-        pieces = 0
-        cells.each_index do |x|
-            x.each_index do |y|
-                if(cells[x][y].isOccupied)
-                    temp=cells[x][y].getPiece()
-                    if(temp.isOwner(owner))
-                        pieces+=
-                    end
-                end
-            end
-        end
-        #somehow count player hand without being stupid
-        #you can go owner.getHandCount() :) !!
+        owner.getHandCount()
     end
 
     
