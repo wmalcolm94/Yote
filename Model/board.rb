@@ -4,7 +4,7 @@ require_relative 'piece'
 
 class Board
   
-    @cells = Cell[5][6]
+    @cells = cell[5][6]
         
     #for all the following src_cell and dest_cell should be a integer array of size 2
     def jump(src_cell, dest_cell)
@@ -79,6 +79,7 @@ class Board
                 else
                     puts "_"
                 end
+            end
         end
     end
     
