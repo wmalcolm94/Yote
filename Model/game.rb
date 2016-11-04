@@ -44,7 +44,8 @@ class Game
         end
     end
     
+    # Check if either player is completely out of pieces, or if both players have 3 or fewer pieces on the board and none in hand remaining. 
     def isOver
-        (@board.countPlayerPieces(@player_1) == 0 || @board.countPlayerPieces(@player_2) == 0 || (@board.countPlayerPieces(@player_1) <= 0 && @board.countPlayerPieces(@player_2) <= 3 && @player_1.getHandCount == 0 && @player_2.getHandCount == 0))
+        (@board.countPlayerPieces(@player_1) == 0 || @board.countPlayerPieces(@player_2) == 0 || (@board.countPlayerPieces(@player_1) <= 3 && @board.countPlayerPieces(@player_2) <= 3 && @player_1.getHandCount == 0 && @player_2.getHandCount == 0))
     end
 end
