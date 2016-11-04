@@ -17,22 +17,34 @@ class Game
     def play
         # Single turn manager and turn counter change
         # Since the game is a hotseat, the only difference will be which player is used for different functions based on the turn, and otherwise loops
-        
         begin
             @turn += 1
             
             # Print out all positions of all pieces
             @board.printBoard
             
-            # Ask the player for input
-            # Use said input in @board.makeChoice(array[2])
+            if(@turn % 2 == 1)
+                puts "Player 1's turn"
+                player_1.takeTurn()
+            else
+                puts "Player 2's turn"
+                player_2.takeTurn()
+            end
             
         end until(isOver)
         
-        # Print winner output based on turn odd or even
+        @board.printBoard
+        
+        if(@board.countPlayerPieces(@player_1) == 0)
+            puts "Player 2 wins"
+        elsif(@board.countPlayerPieces(@player_1) == 0)
+            puts "Player 1 wins"
+        else
+            puts "The game is a draw"
+        end
     end
     
     def isOver
-        (@board.countPlayerPieces(@player_1) == 0 || @board.countPlayerPieces(@player_2) == 0)
+        (@board.countPlayerPieces(@player_1) == 0 || @board.countPlayerPieces(@player_2) == 0 || (@board.countPlayerPieces(@player_1) <= 0 && @board.countPlayerPieces(@player_2) <= 3 && @player_1.getHandCount == 0 && @player_2.getHandCount == 0))
     end
 end
