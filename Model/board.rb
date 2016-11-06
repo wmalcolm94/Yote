@@ -3,7 +3,6 @@ require_relative 'player'
 require_relative 'piece'
 
 class Board  
-    @cells
     
     def initialize
         @cells = Array.new(5) {Array.new(6)}

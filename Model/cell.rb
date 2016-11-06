@@ -1,9 +1,6 @@
 require_relative 'piece'
 
 class Cell
-
-    @piece = nil
-    
     def initialize
         @piece = nil
     end
