@@ -134,9 +134,6 @@ class Board
 
         false
     end
-    
-    
-    private
 
     def getAdjacent(center)
         adjacent = Array.new
