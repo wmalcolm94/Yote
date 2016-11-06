@@ -14,27 +14,13 @@ class Board
         end
     end
     
-
     #in this method owner is an instance of the Player class
         
     #TODO all of this BULLSHIT
     #TODO move this functionality to takeTurn in player as it does not have the correct arguments
     # This function is depreciated
     def makeChoice(src_cell)
-        if @cells[src_cell[0]][src_cell[1]].isOccupied
-            #Supposed to now check the piece that i gots player agaisnt the players whose turn it is.
-            if false #cells[scr_cell[0]][src_cell[1]].player.isNotUs
-                return false
-            end
-            #otherwise its us?
-            #getDestination cell? 
-            dest_cell = @cells[scr_cell[0]][src_cell[1]].getPiece().owner.selectCell()
-            #call canMove and canJump
-            
-        else
-            #if cell is unoccupied place piece there, what piece, probably froma  hand but from what hand
-            @cells[src_cell[0]][src_cell[1]].addPiece(player.hand)
-        end 
+        return @cells[src_cell[0]][src_cell[1]]
     end
 
     #piece in this method is an instance of the piece class (clearly but you never know)

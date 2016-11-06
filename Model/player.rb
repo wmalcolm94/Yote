@@ -33,7 +33,7 @@ class Player
                         puts "Enter which cell you'd like to move to: "
                         
                         dest_coords = selectCell()
-                        dest_cell = @board.cells[dest_coords[0]][dest_coords[1]]
+                        dest_cell = @board.makeChoice(dest_coords)
                         
                         if dest_cell.isOccupied()
                             puts "That cell is occupied!"
@@ -45,7 +45,7 @@ class Player
 
                             while !take
                                 take_coords = selectCell()
-                                take_cell = @board.cells[take_coords[0]][take_coords[1]]
+                                take_cell = @board.makeChoice(take_coords)
                                 
                                 if take_cell.isOccupied() and !@board.validateOwner(take_coords, self)
                                     @board.takePiece(take_coords)
