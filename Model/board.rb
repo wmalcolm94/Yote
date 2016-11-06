@@ -3,14 +3,12 @@ require_relative 'player'
 require_relative 'piece'
 
 class Board  
-
-    
     def initialize
         @cells = Array.new(5) {Array.new(6)}
 
         @cells.each_index do |x|
             x.each_index do |y|
-                @cells[x][y] = cell.initialize
+                @cells[x][y] = Cell.new
             end
         end
     end
