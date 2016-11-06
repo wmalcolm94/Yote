@@ -23,19 +23,17 @@ class Player
 
         while !flag do
             src_coords = selectCell()
-            src_cell = @board.cells[src_coords[0]][src_coords[1]]
             
-            if src_cell.isOccupied()
+            if @board.isOccupied(src_coords)
                 if src_cell.piece.isOwner(self)
                     valid = false
                     
                     while !valid do
                         puts "Enter which cell you'd like to move to: "
                         
-                        dest_coords = selectCell()
-                        dest_cell = @board.makeChoice(dest_coords)
+                        dest_coords = selectCell
                         
-                        if dest_cell.isOccupied()
+                        if @board.isOccupied(dest_coords)
                             puts "That cell is occupied!"
                         elsif @board.canMove(src_coords, dest_coords)
                             @board.jump(src_coords, dest_coords)
@@ -44,10 +42,9 @@ class Player
                             puts "Select which piece you'd like to take: "
 
                             while !take
-                                take_coords = selectCell()
-                                take_cell = @board.makeChoice(take_coords)
+                                take_coords = selectCell
                                 
-                                if take_cell.isOccupied() and !@board.validateOwner(take_coords, self)
+                                if @board.isOccupied(take_coords) and !@board.validateOwner(take_coords, self)
                                     @board.takePiece(take_coords)
                                     take = true
                                 else

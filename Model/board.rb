@@ -16,9 +16,7 @@ class Board
     
     #in this method owner is an instance of the Player class
         
-    #TODO all of this BULLSHIT
-    #TODO move this functionality to takeTurn in player as it does not have the correct arguments
-    # This function is depreciated
+    #repurposed to fetch a cell
     def makeChoice(src_cell)
         return @cells[src_cell[0]][src_cell[1]]
     end
@@ -33,9 +31,13 @@ class Board
         @cells[dest_cell[0]][dest_cell[1]].removePiece()
     end
    
-   #in this method owner is an instance of the player class
+    #in this method owner is an instance of the player class
     def validateOwner(dest_cell, owner)
         @cells[dest_cell[0]][dest_cell[1]].getPiece().isOwner(player)
+    end
+    
+    def isOccupied(dest_cell)
+        @cells[dest_cell[0]][dest_cell[1]].getPiece().isOccupied
     end
 
     def printBoard
