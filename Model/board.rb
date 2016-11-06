@@ -14,50 +14,10 @@ class Board
             end
         end
     end
-            
-    #for all the following src_cell and dest_cell should be a integer array of size 2
-    def jump(src_cell, dest_cell)
-        
-        temp = cells[src_cell[0]][src_cell[1]].removePiece()
-        cells[dest_cell[0]][dest_cell[1]].removePiece()
-        cells[dest_cell[0]][dest_cell[1]].addPiece(temp)
     
-    end
 
-    def move(src_cell, dest_cell)
+    #in this method owner is an instance of the Player class
         
-        temp = cells[src_cell[0][src_cell[1]]].removePiece()
-        cells[dest_cell[0]][dest_cell[1]].addPiece(temp)
-
-    end
-
-    def canJump(src_cell)
-        x_adjacent = [1,-1,0,0]
-        y_adjacent = [0,0,1,-1]
-
-        for i in x_adjacent.length
-            if(cells[src_cell[0] +x_adjacent[i]][src_cells[1]+ y_adjacent[i]].isOccupied)
-                if(cells[src_cells[0] +x_adjacent[i]+x_adjacent[i]][src_cells[1]+y_adjacent[i]+y_adjacent[i]])
-                    return true
-                end
-            end
-        end
-        return false
-    end
-
-    def canMove(src_cell)
-        adjacent = getAdjacent(src_cell)
-
-        for i in adjacent.length
-            if(cells[adjacent[i][0]][adjacent[i][1]].isOccupied)
-            else
-                return true
-            end
-        end
-
-        false
-    end
-
     #TODO all of this BULLSHIT
     #TODO move this functionality to takeTurn in player as it does not have the correct arguments
     # This function is depreciated
@@ -108,7 +68,6 @@ class Board
         end
     end
     
-    #in this method owner is an instance of the Player class
     def countPlayerPieces(owner)
         count = owner.getHandCount()
         
@@ -132,3 +91,46 @@ class Board
         adjacent
     end
 end
+
+    #for all the following src_cell and dest_cell should be a integer array of size 2
+    def jump(src_cell, dest_cell)
+        
+        temp = cells[src_cell[0]][src_cell[1]].removePiece()
+        cells[dest_cell[0]][dest_cell[1]].removePiece()
+        cells[dest_cell[0]][dest_cell[1]].addPiece(temp)
+    
+    end
+
+    def move(src_cell, dest_cell)
+        
+        temp = cells[src_cell[0][src_cell[1]]].removePiece()
+        cells[dest_cell[0]][dest_cell[1]].addPiece(temp)
+
+    end
+
+    def canJump(src_cell)
+        x_adjacent = [1,-1,0,0]
+        y_adjacent = [0,0,1,-1]
+
+        for i in x_adjacent.length
+            if(cells[src_cell[0] +x_adjacent[i]][src_cells[1]+ y_adjacent[i]].isOccupied)
+                if(cells[src_cells[0] +x_adjacent[i]+x_adjacent[i]][src_cells[1]+y_adjacent[i]+y_adjacent[i]])
+                    return true
+                end
+            end
+        end
+        return false
+    end
+
+    def canMove(src_cell)
+        adjacent = getAdjacent(src_cell)
+
+        for i in adjacent.length
+            if(cells[adjacent[i][0]][adjacent[i][1]].isOccupied)
+            else
+                return true
+            end
+        end
+
+        false
+    end
