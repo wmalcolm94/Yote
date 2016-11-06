@@ -2,10 +2,19 @@ require_relative 'cell'
 require_relative 'player'
 require_relative 'piece'
 
-class Board
-  
-    @cells = Array.new
-        
+class Board  
+
+    
+    def initialize
+        @cells = Array.new(5) {Array.new(6)}
+
+        cells.each_index do |x|
+            x.each_index do |y|
+                cells[x][y] = cell.initialize
+            end
+        end
+    end
+            
     #for all the following src_cell and dest_cell should be a integer array of size 2
     def jump(src_cell, dest_cell)
         
@@ -49,8 +58,22 @@ class Board
         false
     end
 
+    #TODO all of this BULLSHIT
     def makeChoice(src_cell)
-        #what a cluster fuck, what is the point of this    
+        if cells[src_cell[0]][src_cell[1]].isOccupied
+            #Supposed to now check the piece that i gots player agaisnt the players whose turn it is.
+            if false #cells[scr_cell[0]][src_cell[1]].player.isNotUs
+                return false
+            end
+            #otherwise its us?
+            #getDestination cell? 
+            dest_cell = cells[scr_cell[0]][src_cell[1]].getPiece().owner.selectCell()
+            #call canMove and canJump
+            
+        else
+            #if cell is unoccupied place piece there, what piece, probably froma  hand but from what hand
+            cells[src_cell[0]][src_cell[1]].addPiece(player.hand)
+        end 
     end
 
     #piece in this method is an instance of the piece class (clearly but you never know)
