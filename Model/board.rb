@@ -59,6 +59,8 @@ class Board
     end
 
     #TODO all of this BULLSHIT
+    #TODO move this functionality to takeTurn in player as it does not have the correct arguments
+    # This function is depreciated
     def makeChoice(src_cell)
         if cells[src_cell[0]][src_cell[1]].isOccupied
             #Supposed to now check the piece that i gots player agaisnt the players whose turn it is.
@@ -108,7 +110,18 @@ class Board
     
     #in this method owner is an instance of the Player class
     def countPlayerPieces(owner)
-        owner.getHandCount()
+        count = owner.getHandCount()
+        
+        cells.each_index do |x|
+            x.each_index do |y|
+                if cells[x][y].isOccupied()
+                    if cells[x][y].getPiece().isOwner(owner)
+                        count +=1
+                    end
+                end
+            end
+        end
+        return count
     end
 
     
