@@ -2,11 +2,6 @@ require_relative 'player'
 require_relative 'board'
 
 class Game
-    turn = 0
-    board = nil
-    player1 = nil
-    player2 = nil
-    
     def initialize
         @turn = 0
         @board = Board.new
@@ -24,23 +19,22 @@ class Game
             @board.printBoard
             
             if(@turn % 2 == 1)
-                puts "Player 1's turn"
-                player_1.takeTurn()
+                puts "Player " + @player_1.getSymbol + "'s turn."
+                @player_1.takeTurn
             else
-                puts "Player 2's turn"
-                player_2.takeTurn()
+                puts "Player " + @player_2.getSymbol + "'s turn."
+                @player_2.takeTurn
             end
-            
-        end until(isOver)
+        end until isOver
         
         @board.printBoard
         
         if(@board.countPlayerPieces(@player_1) == 0)
-            puts "Player 2 wins"
-        elsif(@board.countPlayerPieces(@player_1) == 0)
-            puts "Player 1 wins"
+            puts "Player " + @player_2.getSymbol + " wins."
+        elsif(@board.countPlayerPieces(@player_2) == 0)
+            puts "Player " + @player_1.getSymbol + " wins."
         else
-            puts "The game is a draw"
+            puts "The game is a draw."
         end
     end
     
@@ -49,3 +43,5 @@ class Game
         (@board.countPlayerPieces(@player_1) == 0 || @board.countPlayerPieces(@player_2) == 0 || (@board.countPlayerPieces(@player_1) <= 3 && @board.countPlayerPieces(@player_2) <= 3 && @player_1.getHandCount == 0 && @player_2.getHandCount == 0))
     end
 end
+    
+Game.new.play
