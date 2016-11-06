@@ -16,11 +16,6 @@ class Board
     
     #in this method owner is an instance of the Player class
         
-    #repurposed to fetch a cell
-    def makeChoice(src_cell)
-        return @cells[src_cell[0]][src_cell[1]]
-    end
-
     #piece in this method is an instance of the piece class (clearly but you never know)
     def placePiece(dest_cell, piece)
         @cells[dest_cell[0]][dest_cell[1]].addPiece(piece) 
@@ -57,6 +52,20 @@ class Board
             puts string
         end
     end
+    
+    def countOtherPieces(owner)
+        count = 0 
+        @cells.each_index do |x|
+            @cells[x].each_index do |y|
+                if@cells[x][y].isOccupied()
+                    if @cells[x][y].getPiece().isOwner(owner) == false
+                        count +=1
+                    end
+                end
+            end
+        end
+        return count
+    end    
     
     def countPlayerPieces(owner)
         count = owner.getHandCount()
