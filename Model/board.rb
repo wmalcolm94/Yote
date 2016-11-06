@@ -44,7 +44,7 @@ class Board
         #Prints the board to the terminal
         print "  A B C D E F\n"
         @cells.each_index do |x|
-            string = "" + x.to_s 
+            string = "" + (x+1).to_s 
             @cells[x].each_index do |y|
                 if(@cells[x][y].isOccuppied)
                    temp = @cells[x][y].getPiece()
