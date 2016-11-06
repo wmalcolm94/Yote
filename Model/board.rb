@@ -37,7 +37,7 @@ class Board
     end
     
     def isOccupied(dest_cell)
-        @cells[dest_cell[0]][dest_cell[1]].getPiece().isOccupied
+        @cells[dest_cell[0]][dest_cell[1]].isOccupied
     end
 
     def printBoard
