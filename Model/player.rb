@@ -2,9 +2,9 @@ require_relative 'board'
 require_relative 'hand'
 
 class Player
-	board = nil
-	hand = nil
-    symbol = nil
+	@board = nil
+	@hand = nil
+    @symbol = nil
 
     def initialize(board, symbol)
         @board = board
