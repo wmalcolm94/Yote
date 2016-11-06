@@ -55,15 +55,17 @@ class Board
     def printBoard
         #i think i need more info to write this 
         @cells.each_index do |x|
+            string = ""
             @cells[x].each_index do |y|
                 if(@cells[x][y].isOccuppied)
                    temp = @cells[x][y].getPiece()
                    player = temp.getOwner()
-                   puts player.getSymbol()
+                   string += player.getSymbol() + " "
                 else
-                    puts "_"
+                    string += "_ "
                 end
             end
+            puts string
         end
     end
     
