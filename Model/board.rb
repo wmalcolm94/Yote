@@ -3,14 +3,14 @@ require_relative 'player'
 require_relative 'piece'
 
 class Board  
-
+    @cells
     
     def initialize
         @cells = Array.new(5) {Array.new(6)}
 
         @cells.each_index do |x|
-            x.each_index do |y|
-                @cells[x][y] = cell.initialize
+            @cells[x].each_index do |y|
+                @cells[x][y] = Cell.new
             end
         end
     end
@@ -56,8 +56,8 @@ class Board
     def printBoard
         #i think i need more info to write this 
         @cells.each_index do |x|
-            x.each_index do |y|
-                if(@cells[x][y].isOccupied)
+            @cells[x].each_index do |y|
+                if(@cells[x][y].isOccuppied)
                    temp = @cells[x][y].getPiece()
                    player = temp.getOwner()
                    puts player.getSymbol()
