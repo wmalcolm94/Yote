@@ -5,7 +5,7 @@ class Cell
         @piece = nil
     end
 
-    def isOccuppied
+    def isOccupied
         @piece != nil
     end
 

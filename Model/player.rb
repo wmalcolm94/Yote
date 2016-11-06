@@ -22,10 +22,10 @@ class Player
         puts "Enter which cell you wish to select: "
 
         while !flag do
-            src_coords = selectCell()
+            src_coords = selectCell
             
             if @board.isOccupied(src_coords)
-                if src_cell.piece.isOwner(self)
+                if @board.validateOwner(src_coords, self)
                     valid = false
                     
                     while !valid do
@@ -60,14 +60,13 @@ class Player
                             puts "That cell is too far away!"
                         end
 
-                        @board.makeChoice()
                         flag = true
                     end
                 else
                     puts "That isn't your piece!"
                 end
-            elsif !src_cell.isOccupied()
-                src_cell.addPiece(@hand.removePiece())
+            elsif !@board.isOccupied(src_coords)
+                @board.placePiece(src_coords, @hand.removePiece())
                 flag = true
             end
         end
