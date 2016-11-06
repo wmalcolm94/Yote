@@ -39,9 +39,10 @@ class Board
     end
 
     def printBoard
-        #i think i need more info to write this 
+        #Prints the board to the terminal
+        print "  A B C D E F\n"
         @cells.each_index do |x|
-            string = ""
+            string = "" + x.to_s 
             @cells[x].each_index do |y|
                 if(@cells[x][y].isOccuppied)
                    temp = @cells[x][y].getPiece()
