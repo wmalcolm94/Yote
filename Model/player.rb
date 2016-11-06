@@ -92,6 +92,6 @@ class Player
     	
     	input[0] = input[0].ord - 65
     	input[1] = input[1].to_i - 1
-    	input
+    	input.reverse
     end
 end

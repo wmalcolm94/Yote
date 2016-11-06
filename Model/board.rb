@@ -33,7 +33,7 @@ class Board
    
     #in this method owner is an instance of the player class
     def validateOwner(dest_cell, owner)
-        @cells[dest_cell[0]][dest_cell[1]].getPiece().isOwner(player)
+        @cells[dest_cell[0]][dest_cell[1]].getPiece().isOwner(owner)
     end
     
     def isOccupied(dest_cell)
@@ -62,7 +62,7 @@ class Board
         count = owner.getHandCount()
         
         @cells.each_index do |x|
-            x.each_index do |y|
+            @cells[x].each_index do |y|
                 if@cells[x][y].isOccupied()
                     if @cells[x][y].getPiece().isOwner(owner)
                         count +=1
@@ -73,27 +73,34 @@ class Board
         return count
     end
 
-    
-    private
-
-    def getAdjacent(center)
-        adjacent = [[center[0]-1,center[1]],[center[0]+1,center[1]],[center[0],center[1]-1],center[0],center[1]+1]
-        adjacent
-    end
-end
-
     #for all the following src_cell and dest_cell should be a integer array of size 2
     def jump(src_cell, dest_cell)
         
-        temp = @cells[src_cell[0]][src_cell[1]].removePiece()
-        @cells[dest_cell[0]][dest_cell[1]].removePiece()
+        temp = @cells[src_cell[0]][src_cell[1]].removePiece
+        
+        if(src_cell[0] != dest_cell[0])
+            #vertical jump
+            if(src_cell[0] < dest_cell[0])
+                @cells[src_cell[0]+1,src_cell[1]].removePiece
+            else
+                @cells[src_cell[0]-1,src_cell[1]].removePiece
+            end
+        else
+            #horizontal jump
+            if(src_cell[1] < dest_cell[1])
+                @cells[src_cell[0],src_cell[1]+1].removePiece
+            else
+                @cells[src_cell[0],src_cell[1]-1].removePiece
+            end
+        end
+        
         @cells[dest_cell[0]][dest_cell[1]].addPiece(temp)
     
     end
 
     def move(src_cell, dest_cell)
         
-        temp = @cells[src_cell[0][src_cell[1]]].removePiece()
+        temp = @cells[src_cell[0][src_cell[1]]].removePiece
         @cells[dest_cell[0]][dest_cell[1]].addPiece(temp)
 
     end
@@ -103,9 +110,13 @@ end
         y_adjacent = [0,0,1,-1]
 
         for i in x_adjacent.length
-            if(@cells[src_cell[0] +x_adjacent[i]][src_cells[1]+ y_adjacent[i]].isOccupied)
-                if(@cells[src_cells[0] +x_adjacent[i]+x_adjacent[i]][src_cells[1]+y_adjacent[i]+y_adjacent[i]])
-                    return true
+            if(src_cell[0] +x_adjacent[i]*2 >= 0 && src_cell[0] +x_adjacent[i]*2 < @cells[0].length && src_cell[1] +y_adjacent[i]*2 >= 0 && src_cell[1] +y_adjacent[i]*2 < @cells.length)
+                if(@cells[src_cell[0] +x_adjacent[i]][src_cells[1]+ y_adjacent[i]].isOccupied)
+                    if(!validateOwner([src_cell[0] +x_adjacent[i]][src_cells[1]+ y_adjacent[i]], @cells[src_cell[0][src_cell[1]]].getOwner))
+                        if(!@cells[src_cells[0] +x_adjacent[i]*2][src_cells[1]+y_adjacent[i]*2].isOccupied)
+                            return true
+                        end
+                    end
                 end
             end
         end
@@ -116,11 +127,31 @@ end
         adjacent = getAdjacent(src_cell)
 
         for i in adjacent.length
-            if(@cells[adjacent[i][0]][adjacent[i][1]].isOccupied)
-            else
+            if(!@cells[adjacent[i][0]][adjacent[i][1]].isOccupied)
                 return true
             end
         end
 
         false
     end
+    
+    
+    private
+
+    def getAdjacent(center)
+        adjacent = Array.new
+        if(center[0]-1 >= 0)
+            adjactent.push([center[0]-1,center[1]])
+        end
+        if(center[0]+1 < @cells.length)
+            adjactent.push([center[0]+1,center[1]])
+        end
+        if(center[1]-1 >= 0)
+            adjactent.push([center[0],center[1]-1])
+        end
+        if(center[1]+1 < @cells[0].length)
+            adjactent.push([center[0],center[1]+1])
+        end
+        adjacent
+    end
+end
