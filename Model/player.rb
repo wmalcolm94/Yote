@@ -17,7 +17,112 @@ class Player
     end
 
     def takeTurn
-        
+        flag = false
+        while !flag do
+            src_coords = selectCell
+            
+            if @board.isOccupied(src_coords)
+                if @board.validateOwner(src_coords, self) == self
+                
+                    if @board.canJump(src_coords) || @board.canMove(src_coords)
+                        break
+                    else 
+                        flag = true
+                    end
+                end
+            else
+                if @hand.getCount() > 0
+                    @board.placePiece(@hand.removePiece())
+                    return nil
+                else
+                    flag = true
+                end
+            end
+        end
+
+        flag = false
+        while !flag do
+            dest_coords = selectCell
+            jump_count = 0
+            middle_coords = nil
+
+            if @board.isOccupied(dest_coords)
+                flag = true
+            else
+                if @board.getAdjacentPieces(src_coords).include? dest_coords
+                    @board.move(src_coords, dest_coords)
+                else
+                    if @board.canJump(src_coords)
+                        if ((-2 < (src_coords[0] - dest_coords[0]) < 2) && (src_coords[1] - dest_coords[1] == 0) && \
+                            ((-1 < dest_coords[0] < 5) && (-1 < dest_coords[1] < 6) && (-1 < src_coords[0] < 5) && (-1 < src_coords[1] < 6))
+                            
+                            if(src_cell[0] != dest_cell[0])
+                                #vertical jump
+                                if(src_cell[0] < dest_cell[0])
+                                    middle_coords = @cells[src_cell[0]+1,src_cell[1]]
+                                else
+                                    middle_coords = @cells[src_cell[0]-1,src_cell[1]]
+                                end
+                            else
+                                #horizontal jump
+                                if(src_cell[1] < dest_cell[1])
+                                    middle_coords = @cells[src_cell[0],src_cell[1]+1]
+                                else
+                                    middle_coords = @cells[src_cell[0],src_cell[1]-1]
+                                end
+                            end
+
+                            if ((!@board.validateOwner(middle_coords, self)) && (@board.isOccupied(middle_coords)))
+                                @board.jump(src_coords, dest_coords)
+                                jump_count += 1
+                                src_coords = dest_coords
+                                dest_coords = selectCell
+                                
+                                while (@board.canJump(dest_coords))
+                                    
+                                    if ((-2 < (src_coords[0] - dest_coords[0]) < 2) && (src_coords[1] - dest_coords[1] == 0) && \
+                                        ((-1 < dest_coords[0] < 5) && (-1 < dest_coords[1] < 6) && (-1 < src_coords[0] < 5) && (-1 < src_coords[1] < 6))   
+                                        if(src_cell[0] != dest_cell[0])
+                                            if(src_cell[0] < dest_cell[0])
+                                                middle_coords = @cells[src_cell[0]+1,src_cell[1]]
+                                            else
+                                                middle_coords = @cells[src_cell[0]-1,src_cell[1]]
+                                            end
+                                        else
+                                            if(src_cell[1] < dest_cell[1])
+                                                middle_coords = @cells[src_cell[0],src_cell[1]+1]
+                                            else
+                                                middle_coords = @cells[src_cell[0],src_cell[1]-1]
+                                            end
+                                        end
+                                        if ((!@board.validateOwner(middle_coords, self)) && (@board.isOccupied(middle_coords)))
+                                            @board.jump(src_coords, dest_coords)
+                                            jump_count += 1
+                                            src_coords = dest_coords
+                                            dest_coords = selectCell
+                                        end
+                                    end
+                                end
+                                for i in 0..jump_count
+                                    flag = false
+                                    while !flag do
+                                        if @board.countOtherPieces(self) > 0
+                                            take_coords = selectCell
+                                            if ((!@board.validateOwner(middle_coords, self)) && (@board.isOccupied(middle_coords)))
+                                                @board.takePiece(take_coords)
+                                                break
+                                            end
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+
         #Loop forever
         #
         #   #Select cell (src_cell)
@@ -185,7 +290,7 @@ class Player
 #                flag = true
 #            end
 #        end
-    end
+#    end
 
     def selectCell
     	flag  = false
