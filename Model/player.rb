@@ -157,11 +157,12 @@ class Player
                             @board.takePiece(take_coords)
                             break
                         else
-                            puts "That is not a valid selection."
+                            puts "That is not an opponent's piece."
                         end
                     end
+                    puts "Piece captured."
                 else
-                    puts "Your opponent has no pieces to capture."
+                    puts "Your opponent has no pieces left to capture."
                     break
                 end
                 i+=1;
