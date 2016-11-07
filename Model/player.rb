@@ -17,44 +17,51 @@ class Player
     end
 
     def takeTurn
-        flag = false
-        while !flag do
+        puts "Enter which cell you wish to select: "
+        
+        while true do
             src_coords = selectCell
             
             if @board.isOccupied(src_coords)
-                if @board.validateOwner(src_coords, self) == self
-                
+                if @board.validateOwner(src_coords, self)
                     if @board.canJump(src_coords) || @board.canMove(src_coords)
                         break
                     else 
-                        flag = true
+                        puts "That piece belongs to your opponent."
+                        Continue
                     end
                 end
             else
                 if @hand.getCount() > 0
+                    puts "Piece Placed."
                     @board.placePiece(src_coords, @hand.removePiece())
                     return nil
                 else
-                    flag = true
+                    puts "No pieces left in hand."
+                    Continue
                 end
             end
         end
 
-        flag = false
-        while !flag do
+        puts "Enter which cell you'd like to move or jump to: "
+        
+        while true do
             dest_coords = selectCell
             jump_count = 0
             middle_coords = nil
 
             if @board.isOccupied(dest_coords)
-                flag = true
+                puts "That position is occupied."
+                Continue
             else
                 if @board.getAdjacentPieces(src_coords).include? dest_coords
                     @board.move(src_coords, dest_coords)
+                    puts "Piece moved."
+                    break
                 else
                     if @board.canJump(src_coords)
-                        if ((-2 < (src_coords[0] - dest_coords[0]) < 2) && (src_coords[1] - dest_coords[1] == 0) && \
-                            ((-1 < dest_coords[0] < 5) && (-1 < dest_coords[1] < 6) && (-1 < src_coords[0] < 5) && (-1 < src_coords[1] < 6)))
+                        if (src_coords[0] - dest_coords[0] >= -2 && src_coords[0] - dest_coords[0] <= 2 && src_coords[1] - dest_coords[1] == 0) || \
+                                (src_coords[1] - dest_coords[1] >= -2 && src_coords[1] - dest_coords[1] <= 2 && src_coords[0] - dest_coords[0] == 0)
                             
                             if(src_cell[0] != dest_cell[0])
                                 #vertical jump
@@ -76,50 +83,78 @@ class Player
                                 @board.jump(src_coords, dest_coords)
                                 jump_count += 1
                                 src_coords = dest_coords
-                                dest_coords = selectCell
+                                puts "Select a position to jump again to: "
                                 
                                 while (@board.canJump(dest_coords))
+                                    if src_coords != dest_coords
+                                        puts "Select a position to jump again to: "
+                                    end
+                                    src_coords = dest_coords
+                                    new_dest_coords = selectCell
                                     
-                                    if ((-2 < (src_coords[0] - dest_coords[0]) < 2) && (src_coords[1] - dest_coords[1] == 0) && \
-                                        ((-1 < dest_coords[0] < 5) && (-1 < dest_coords[1] < 6) && (-1 < src_coords[0] < 5) && (-1 < src_coords[1] < 6)))   
-                                        if(src_cell[0] != dest_cell[0])
-                                            if(src_cell[0] < dest_cell[0])
+                                    if (src_coords[0] - new_dest_coords[0] >= -2 && src_coords[0] - new_dest_coords[0] <= 2 && src_coords[1] - new_dest_coords[1] == 0) || \
+                                            (src_coords[1] - new_dest_coords[1] >= -2 && src_coords[1] - new_dest_coords[1] <= 2 && src_coords[0] - new_dest_coords[0] == 0)
+                                        if(src_cell[0] != new_dest_cell[0])
+                                            if(src_cell[0] < new_dest_cell[0])
                                                 middle_coords = @cells[src_cell[0]+1,src_cell[1]]
                                             else
                                                 middle_coords = @cells[src_cell[0]-1,src_cell[1]]
                                             end
                                         else
-                                            if(src_cell[1] < dest_cell[1])
+                                            if(src_cell[1] < new_dest_cell[1])
                                                 middle_coords = @cells[src_cell[0],src_cell[1]+1]
                                             else
                                                 middle_coords = @cells[src_cell[0],src_cell[1]-1]
                                             end
                                         end
                                         if ((!@board.validateOwner(middle_coords, self)) && (@board.isOccupied(middle_coords)))
+                                            dest_coords = new_dest_coords
                                             @board.jump(src_coords, dest_coords)
                                             jump_count += 1
-                                            src_coords = dest_coords
-                                            dest_coords = selectCell
+                                            puts "Piece jumped."
+                                        else
+                                            puts "There isn't an enemy's piece to jump."
+                                            Continue
                                         end
+                                    else
+                                        puts "That isn't a position you can jump to."
+                                        Continue
                                     end
                                 end
-                                for i in 0..jump_count
-                                    flag = false
-                                    while !flag do
-                                        if @board.countOtherPieces(self) > 0
-                                            take_coords = selectCell
-                                            if ((!@board.validateOwner(middle_coords, self)) && (@board.isOccupied(middle_coords)))
-                                                @board.takePiece(take_coords)
-                                                break
-                                            end
-                                        end
-                                    end
-                                end
+                            else
+                                puts "There isn't an enemy's piece to jump."
+                                Continue
                             end
+                        else
+                            puts "Your piece cannot move or jump there."
+                            Continue
                         end
+                    else
+                        puts "Your piece cannot move or jump there."
+                        Continue
                     end
                 end
+                
             end
+            for i in 0..jump_count
+                if @board.countOtherPieces(self) > 0
+                    puts "Enter an opponent's piece to capture: "
+                    while true do
+                        take_coords = selectCell
+                        if ((!@board.validateOwner(middle_coords, self)) && (@board.isOccupied(middle_coords)))
+                            @board.takePiece(take_coords)
+                            break
+                        else
+                            puts "That is not a valid selection."
+                        end
+                    end
+                else
+                    puts "Your opponent has no pieces to capture."
+                    break
+                end
+            end
+            
+            return nil
         end
     end
 
@@ -168,7 +203,7 @@ class Player
         #   #   #   #canJump?
         #   #   #   #Yes:
         #   #   #   #   #Is cell +/- 2 horizontal of src_cell XOR +/- 2 vertical of src_cell? 
-        #   #   #   #       #HINT: ((-2 < src_cell[0] - dest_cell[0] < 2) AND (src_cell[1] - desk_cell[1] == 0) AND (0 >= dest_cell >= 5))
+        #   #   #   #       #HINT: ((-2 < src_cell[0] - dest_cell[0] < 2) AND (src_cell[1] - desk_cell[1] == 0) AND (0 >= dest_cell[0] >= 5))
         #   #   #   #           #Psudo code of the check for vertical.
         #   #   #   #   #Yes:
         #   #   #   #   #   #Is cell between src_cell and dest_cell occupied?

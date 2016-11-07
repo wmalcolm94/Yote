@@ -7,9 +7,9 @@ class Board
     def initialize
         @cells = Array.new(5) {Array.new(6)}
 
-        @cells.each_index do |x|
-            @cells[x].each_index do |y|
-                @cells[x][y] = Cell.new
+        @cells.each_index do |y|
+            @cells[y].each_index do |x|
+                @cells[y][x] = Cell.new
             end
         end
     end
@@ -38,11 +38,11 @@ class Board
     def printBoard
         #Prints the board to the terminal
         puts "  A B C D E F"
-        @cells.each_index do |x|
-            string = (x+1).to_s + " "
-            @cells[x].each_index do |y|
-                if(@cells[x][y].isOccupied)
-                   temp = @cells[x][y].getPiece()
+        @cells.each_index do |y|
+            string = (y+1).to_s + " "
+            @cells[y].each_index do |x|
+                if(@cells[y][x].isOccupied)
+                   temp = @cells[y][x].getPiece()
                    player = temp.getOwner()
                    string += player.getSymbol() + " "
                 else
@@ -55,10 +55,10 @@ class Board
     
     def countOtherPieces(owner)
         count = 0 
-        @cells.each_index do |x|
-            @cells[x].each_index do |y|
-                if@cells[x][y].isOccupied()
-                    if @cells[x][y].getPiece().isOwner(owner) == false
+        @cells.each_index do |y|
+            @cells[y].each_index do |x|
+                if@cells[y][x].isOccupied()
+                    if @cells[y][x].getPiece().isOwner(owner) == false
                         count +=1
                     end
                 end
@@ -70,10 +70,10 @@ class Board
     def countPlayerPieces(owner)
         count = owner.getHandCount()
         
-        @cells.each_index do |x|
-            @cells[x].each_index do |y|
-                if@cells[x][y].isOccupied()
-                    if @cells[x][y].getPiece().isOwner(owner)
+        @cells.each_index do |y|
+            @cells[y].each_index do |x|
+                if@cells[y][x].isOccupied()
+                    if @cells[y][x].getPiece().isOwner(owner)
                         count +=1
                     end
                 end
@@ -119,10 +119,10 @@ class Board
         y_adjacent = [0,0,1,-1]
 
         for i in x_adjacent.length
-            if(src_cell[0] +x_adjacent[i]*2 >= 0 && src_cell[0] +x_adjacent[i]*2 < @cells[0].length && src_cell[1] +y_adjacent[i]*2 >= 0 && src_cell[1] +y_adjacent[i]*2 < @cells.length)
-                if(@cells[src_cell[0] +x_adjacent[i]][src_cells[1]+ y_adjacent[i]].isOccupied)
-                    if(!validateOwner([src_cell[0] +x_adjacent[i]][src_cells[1]+ y_adjacent[i]], @cells[src_cell[0][src_cell[1]]].getOwner))
-                        if(!@cells[src_cells[0] +x_adjacent[i]*2][src_cells[1]+y_adjacent[i]*2].isOccupied)
+            if(src_cell[0] +y_adjacent[i]*2 >= 0 && src_cell[0] +y_adjacent[i]*2 < @cells[0].length && src_cell[1] +x_adjacent[i]*2 >= 0 && src_cell[1] +x_adjacent[i]*2 < @cells.length)
+                if(@cells[src_cell[0] +y_adjacent[i]][src_cells[1]+ x_adjacent[i]].isOccupied)
+                    if(!validateOwner([src_cell[0] +y_adjacent[i]][src_cells[1]+ x_adjacent[i]], @cells[src_cell[0][src_cell[1]]].getOwner))
+                        if(!@cells[src_cells[0] +y_adjacent[i]*2][src_cells[1]+x_adjacent[i]*2].isOccupied)
                             return true
                         end
                     end
