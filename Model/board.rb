@@ -90,16 +90,16 @@ class Board
         if(src_cell[0] != dest_cell[0])
             #vertical jump
             if(src_cell[0] < dest_cell[0])
-                @cells[src_cell[0]+1,src_cell[1]].removePiece
+                @cells[src_cell[0]+1][src_cell[1]].removePiece
             else
-                @cells[src_cell[0]-1,src_cell[1]].removePiece
+                @cells[src_cell[0]-1][src_cell[1]].removePiece
             end
         else
             #horizontal jump
             if(src_cell[1] < dest_cell[1])
-                @cells[src_cell[0],src_cell[1]+1].removePiece
+                @cells[src_cell[0]][src_cell[1]+1].removePiece
             else
-                @cells[src_cell[0],src_cell[1]-1].removePiece
+                @cells[src_cell[0]][src_cell[1]-1].removePiece
             end
         end
         

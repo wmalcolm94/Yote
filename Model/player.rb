@@ -65,19 +65,19 @@ class Player
                         if (src_coords[0] - dest_coords[0] >= -2 && src_coords[0] - dest_coords[0] <= 2 && src_coords[1] - dest_coords[1] == 0) || \
                                 (src_coords[1] - dest_coords[1] >= -2 && src_coords[1] - dest_coords[1] <= 2 && src_coords[0] - dest_coords[0] == 0)
                             
-                            if(src_cell[0] != dest_cell[0])
+                            if(src_coords[0] != dest_coords[0])
                                 #vertical jump
-                                if(src_cell[0] < dest_cell[0])
-                                    middle_coords = @cells[src_cell[0]+1,src_cell[1]]
+                                if(src_coords[0] < dest_coords[0])
+                                    middle_coords = [src_coords[0]+1,src_coords[1]]
                                 else
-                                    middle_coords = @cells[src_cell[0]-1,src_cell[1]]
+                                    middle_coords = [src_coords[0]-1,src_coords[1]]
                                 end
                             else
                                 #horizontal jump
-                                if(src_cell[1] < dest_cell[1])
-                                    middle_coords = @cells[src_cell[0],src_cell[1]+1]
+                                if(src_coords[1] < dest_coords[1])
+                                    middle_coords = [src_coords[0],src_coords[1]+1]
                                 else
-                                    middle_coords = @cells[src_cell[0],src_cell[1]-1]
+                                    middle_coords = [src_coords[0],src_coords[1]-1]
                                 end
                             end
 
@@ -96,17 +96,17 @@ class Player
                                     
                                     if (src_coords[0] - new_dest_coords[0] >= -2 && src_coords[0] - new_dest_coords[0] <= 2 && src_coords[1] - new_dest_coords[1] == 0) || \
                                             (src_coords[1] - new_dest_coords[1] >= -2 && src_coords[1] - new_dest_coords[1] <= 2 && src_coords[0] - new_dest_coords[0] == 0)
-                                        if(src_cell[0] != new_dest_cell[0])
-                                            if(src_cell[0] < new_dest_cell[0])
-                                                middle_coords = @cells[src_cell[0]+1,src_cell[1]]
+                                        if(src_coords[0] != new_dest_coords[0])
+                                            if(src_coords[0] < new_dest_coords[0])
+                                                middle_coords = [src_coords[0]+1,src_coords[1]]
                                             else
-                                                middle_coords = @cells[src_cell[0]-1,src_cell[1]]
+                                                middle_coords = [src_coords[0]-1,src_coords[1]]
                                             end
                                         else
                                             if(src_cell[1] < new_dest_cell[1])
-                                                middle_coords = @cells[src_cell[0],src_cell[1]+1]
+                                                middle_coords = [src_coords[0],src_coords[1]+1]
                                             else
-                                                middle_coords = @cells[src_cell[0],src_cell[1]-1]
+                                                middle_coords = [src_coords[0],src_coords[1]-1]
                                             end
                                         end
                                         if ((!@board.validateOwner(middle_coords, self)) && (@board.isOccupied(middle_coords)))
