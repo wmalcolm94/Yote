@@ -147,16 +147,16 @@ class Board
     def getAdjacent(center)
         adjacent = Array.new
         if(center[0]-1 >= 0)
-            adjactent.push([center[0]-1,center[1]])
+            adjacent.push([center[0]-1,center[1]])
         end
         if(center[0]+1 < @cells.length)
-            adjactent.push([center[0]+1,center[1]])
+            adjacent.push([center[0]+1,center[1]])
         end
         if(center[1]-1 >= 0)
-            adjactent.push([center[0],center[1]-1])
+            adjacent.push([center[0],center[1]-1])
         end
         if(center[1]+1 < @cells[0].length)
-            adjactent.push([center[0],center[1]+1])
+            adjacent.push([center[0],center[1]+1])
         end
         adjacent
     end

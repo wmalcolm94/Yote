@@ -56,7 +56,7 @@ class Player
                 puts "That position is occupied."
                 next
             else
-                if @board.getAdjacentPieces(src_coords).include? dest_coords
+                if @board.getAdjacent(src_coords).include? dest_coords
                     @board.move(src_coords, dest_coords)
                     puts "Piece moved."
                     break
