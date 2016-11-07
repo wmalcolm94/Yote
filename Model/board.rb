@@ -118,7 +118,7 @@ class Board
         y_adjacent = [0,0,1,-1]
         x_adjacent = [1,-1,0,0]
 
-        for i in y_adjacent.length
+        for i in 0..3
             if(src_cell[0] +y_adjacent[i]*2 >= 0 && src_cell[0] +y_adjacent[i]*2 < @cells[0].length && src_cell[1] +x_adjacent[i]*2 >= 0 && src_cell[1] +x_adjacent[i]*2 < @cells.length)
                 if(@cells[src_cell[0] +y_adjacent[i]][src_cells[1]+ x_adjacent[i]].isOccupied)
                     if(!validateOwner([src_cell[0] +y_adjacent[i]][src_cells[1]+ x_adjacent[i]], @cells[src_cell[0][src_cell[1]]].getOwner))

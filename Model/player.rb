@@ -28,7 +28,7 @@ class Player
                         break
                     else 
                         puts "That piece can't move or jump."
-                        Continue
+                        next
                     end
                 else
                     puts "That piece doesn't belong to you."
@@ -40,7 +40,7 @@ class Player
                     return nil
                 else
                     puts "No pieces left in hand."
-                    Continue
+                    next
                 end
             end
         end
@@ -54,7 +54,7 @@ class Player
 
             if @board.isOccupied(dest_coords)
                 puts "That position is occupied."
-                Continue
+                next
             else
                 if @board.getAdjacentPieces(src_coords).include? dest_coords
                     @board.move(src_coords, dest_coords)
@@ -116,24 +116,24 @@ class Player
                                             puts "Piece jumped."
                                         else
                                             puts "There isn't an enemy's piece to jump."
-                                            Continue
+                                            next
                                         end
                                     else
                                         puts "That isn't a position you can jump to."
-                                        Continue
+                                        next
                                     end
                                 end
                             else
                                 puts "There isn't an enemy's piece to jump."
-                                Continue
+                                next
                             end
                         else
                             puts "Your piece cannot move or jump there."
-                            Continue
+                            next
                         end
                     else
                         puts "Your piece cannot move or jump there."
-                        Continue
+                        next
                     end
                 end
                 
@@ -172,16 +172,16 @@ class Player
         #   #   #   #Yes:
         #   #   #       #Break (exit loop)
         #   #   #   #No:
-        #   #   #       #Continue (skip rest of code in loop)
+        #   #   #       #next (skip rest of code in loop)
         #   #   #No:
-        #   #       #Continue (skip rest of code in loop)
+        #   #       #next (skip rest of code in loop)
         #   #No:
         #   #   #Are there pieces in player's hand?
         #   #   #Yes:
         #   #   #   #Place piece in location
         #   #   #   #Return nil
         #   #   #No:
-        #   #       #Continue (skip rest of code in loop)
+        #   #       #next (skip rest of code in loop)
         #   #
         #End loop
         
@@ -195,7 +195,7 @@ class Player
         #
         #   #Is dest_cell occupied?
         #   #Yes:
-        #       #Continue (skip rest of code in loop)
+        #       #next (skip rest of code in loop)
         #   #No:
         #   #   #Is dest_cell in list of adjactent cells?
         #   #   #Yes:
@@ -221,7 +221,7 @@ class Player
         #   #   #   #   #   #   #   #
         #   #   #   #   #   #   #   #   #Is new_dest_cell occupied?
         #   #   #   #   #   #   #   #   #Yes:
-        #   #   #   #   #   #   #   #       #Continue (skip rest of code in loop)
+        #   #   #   #   #   #   #   #       #next (skip rest of code in loop)
         #   #   #   #   #   #   #   #   #No:
         #   #   #   #   #   #   #   #   #   #Is cell +/- 2 horizontal of src_cell XOR +/- 2 vertical of src_cell? (see previous time used)
         #   #   #   #   #   #   #   #   #   #Yes:
@@ -233,11 +233,11 @@ class Player
         #   #   #   #   #   #   #   #   #   #   #   #   #Jump from src_cell to dest_cell
         #   #   #   #   #   #   #   #   #   #   #   #   #jumpcount++
         #   #   #   #   #   #   #   #   #   #   #   #No:
-        #   #   #   #   #   #   #   #   #   #   #       #Continue (skip rest of code in loop)
+        #   #   #   #   #   #   #   #   #   #   #       #next (skip rest of code in loop)
         #   #   #   #   #   #   #   #   #   #   #No:
-        #   #   #   #   #   #   #   #   #   #       #Continue (skip rest of code in loop)
+        #   #   #   #   #   #   #   #   #   #       #next (skip rest of code in loop)
         #   #   #   #   #   #   #   #   #   #No:
-        #   #   #   #   #   #   #   #   #       #Continue (skip rest of code in loop)
+        #   #   #   #   #   #   #   #   #       #next (skip rest of code in loop)
         #   #   #   #   #   #   #   #End loop
         #   #   #   #   #   #   #
         #   #   #   #   #   #   #   #Loop for jumpcount times
@@ -252,21 +252,21 @@ class Player
         #   #   #   #   #   #   #   #   #   #   #   #   #Take piece in take_cell off board
         #   #   #   #   #   #   #   #   #   #   #   #   #Break (exit loop)
         #   #   #   #   #   #   #   #   #   #   #   #No:
-        #   #   #   #   #   #   #   #   #   #   #       #Continue (skip rest of code in loop)
+        #   #   #   #   #   #   #   #   #   #   #       #next (skip rest of code in loop)
         #   #   #   #   #   #   #   #   #   #   #No:
-        #   #   #   #   #   #   #   #   #   #       #Continue (skip rest of code in loop)
+        #   #   #   #   #   #   #   #   #   #       #next (skip rest of code in loop)
         #   #   #   #   #   #   #   #   #   #End loop
         #   #   #   #   #   #   #   #   #No:
         #   #   #   #   #   #   #   #       #Break (exit loop)
         #   #   #   #   #   #   #   #End loop
         #   #   #   #   #   #   #No:
-        #   #   #   #   #   #       #Continue (skip rest of code in loop)
+        #   #   #   #   #   #       #next (skip rest of code in loop)
         #   #   #   #   #   #No:
-        #   #   #   #   #       #Continue (skip rest of code in loop)
+        #   #   #   #   #       #next (skip rest of code in loop)
         #   #   #   #   #No:
-        #   #   #   #       #Continue (skip rest of code in loop)
+        #   #   #   #       #next (skip rest of code in loop)
         #   #   #   #No:
-        #   #   #       #Continue (skip rest of code in loop)
+        #   #   #       #next (skip rest of code in loop)
         #   #   #
         #End loop
                     
