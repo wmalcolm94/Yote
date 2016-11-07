@@ -28,7 +28,11 @@ class Board
    
     #in this method owner is an instance of the player class
     def validateOwner(dest_cell, owner)
-        @cells[dest_cell[0]][dest_cell[1]].getPiece().isOwner(owner)
+        piece = @cells[dest_cell[0]][dest_cell[1]].getPiece()
+        if piece != nil
+            return piece.isOwner(owner)
+        end
+        return false
     end
     
     def isOccupied(dest_cell)
@@ -109,7 +113,7 @@ class Board
 
     def move(src_cell, dest_cell)
         
-        temp = @cells[src_cell[0][src_cell[1]]].removePiece
+        temp = @cells[src_cell[0]][src_cell[1]].removePiece
         @cells[dest_cell[0]][dest_cell[1]].addPiece(temp)
 
     end
@@ -134,11 +138,12 @@ class Board
 
     def canMove(src_cell)
         adjacent = getAdjacent(src_cell)
-
-        for i in adjacent.length
+        i = 0
+        while i < adjacent.length
             if(!@cells[adjacent[i][0]][adjacent[i][1]].isOccupied)
                 return true
             end
+            i+=1
         end
 
         false

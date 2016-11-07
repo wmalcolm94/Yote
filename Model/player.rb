@@ -85,7 +85,11 @@ class Player
                                 @board.jump(src_coords, dest_coords)
                                 jump_count += 1
                                 src_coords = dest_coords
-                                puts "Select a position to jump again to: "
+                                puts "Piece jumped."
+                                
+                                if(@board.canJump(dest_coords))
+                                    puts "Select a position to jump again to: "
+                                end
                                 
                                 while (@board.canJump(dest_coords))
                                     if src_coords != dest_coords
@@ -93,6 +97,11 @@ class Player
                                     end
                                     src_coords = dest_coords
                                     new_dest_coords = selectCell
+                                    
+                                    if src_coords == new_dest_coords
+                                        puts "that's your current new position."
+                                        next
+                                    end
                                     
                                     if (src_coords[0] - new_dest_coords[0] >= -2 && src_coords[0] - new_dest_coords[0] <= 2 && src_coords[1] - new_dest_coords[1] == 0) || \
                                             (src_coords[1] - new_dest_coords[1] >= -2 && src_coords[1] - new_dest_coords[1] <= 2 && src_coords[0] - new_dest_coords[0] == 0)
@@ -103,7 +112,7 @@ class Player
                                                 middle_coords = [src_coords[0]-1,src_coords[1]]
                                             end
                                         else
-                                            if(src_cell[1] < new_dest_cell[1])
+                                            if(src_coords[1] < new_dest_coords[1])
                                                 middle_coords = [src_coords[0],src_coords[1]+1]
                                             else
                                                 middle_coords = [src_coords[0],src_coords[1]-1]
@@ -138,12 +147,13 @@ class Player
                 end
                 
             end
-            for i in 0..jump_count
+            i = 0
+            while i < jump_count
                 if @board.countOtherPieces(self) > 0
                     puts "Enter an opponent's piece to capture: "
                     while true do
                         take_coords = selectCell
-                        if ((!@board.validateOwner(middle_coords, self)) && (@board.isOccupied(middle_coords)))
+                        if ((!@board.validateOwner(middle_coords, self)) && (@board.isOccupied(take_coords)))
                             @board.takePiece(take_coords)
                             break
                         else
@@ -154,6 +164,7 @@ class Player
                     puts "Your opponent has no pieces to capture."
                     break
                 end
+                i+=1;
             end
             
             return nil

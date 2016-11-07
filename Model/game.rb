@@ -16,6 +16,9 @@ class Game
             @turn += 1
             
             # Print out all positions of all pieces
+            puts "Pieces in hand:"
+            puts "Player " + @player_1.getSymbol + ": " + @player_1.getHandCount.to_s
+            puts "Player " + @player_2.getSymbol + ": " + @player_2.getHandCount.to_s
             @board.printBoard
             
             if(@turn % 2 == 1)
