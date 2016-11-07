@@ -32,7 +32,7 @@ class Player
                 end
             else
                 if @hand.getCount() > 0
-                    @board.placePiece(@hand.removePiece())
+                    @board.placePiece(src_coords, @hand.removePiece())
                     return nil
                 else
                     flag = true
@@ -54,7 +54,7 @@ class Player
                 else
                     if @board.canJump(src_coords)
                         if ((-2 < (src_coords[0] - dest_coords[0]) < 2) && (src_coords[1] - dest_coords[1] == 0) && \
-                            ((-1 < dest_coords[0] < 5) && (-1 < dest_coords[1] < 6) && (-1 < src_coords[0] < 5) && (-1 < src_coords[1] < 6))
+                            ((-1 < dest_coords[0] < 5) && (-1 < dest_coords[1] < 6) && (-1 < src_coords[0] < 5) && (-1 < src_coords[1] < 6)))
                             
                             if(src_cell[0] != dest_cell[0])
                                 #vertical jump
@@ -81,7 +81,7 @@ class Player
                                 while (@board.canJump(dest_coords))
                                     
                                     if ((-2 < (src_coords[0] - dest_coords[0]) < 2) && (src_coords[1] - dest_coords[1] == 0) && \
-                                        ((-1 < dest_coords[0] < 5) && (-1 < dest_coords[1] < 6) && (-1 < src_coords[0] < 5) && (-1 < src_coords[1] < 6))   
+                                        ((-1 < dest_coords[0] < 5) && (-1 < dest_coords[1] < 6) && (-1 < src_coords[0] < 5) && (-1 < src_coords[1] < 6)))   
                                         if(src_cell[0] != dest_cell[0])
                                             if(src_cell[0] < dest_cell[0])
                                                 middle_coords = @cells[src_cell[0]+1,src_cell[1]]
@@ -307,11 +307,13 @@ class Player
 	    		puts "Second character must be 1-5."
 	    	else
 	    		flag = true
-	    	end
-    	end
+    	        end
+
+        end
     	
     	input[0] = input[0].ord - 65
     	input[1] = input[1].to_i - 1
     	input.reverse
     end
+
 end
