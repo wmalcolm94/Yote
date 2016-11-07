@@ -120,9 +120,9 @@ class Board
 
         for i in 0..3
             if(src_cell[0] +y_adjacent[i]*2 >= 0 && src_cell[0] +y_adjacent[i]*2 < @cells[0].length && src_cell[1] +x_adjacent[i]*2 >= 0 && src_cell[1] +x_adjacent[i]*2 < @cells.length)
-                if(@cells[src_cell[0] +y_adjacent[i]][src_cells[1]+ x_adjacent[i]].isOccupied)
-                    if(!validateOwner([src_cell[0] +y_adjacent[i]][src_cells[1]+ x_adjacent[i]], @cells[src_cell[0][src_cell[1]]].getOwner))
-                        if(!@cells[src_cells[0] +y_adjacent[i]*2][src_cells[1]+x_adjacent[i]*2].isOccupied)
+                if(@cells[src_cell[0] +y_adjacent[i]][src_cell[1]+ x_adjacent[i]].isOccupied)
+                    if(!validateOwner([src_cell[0] +y_adjacent[i],src_cell[1]+ x_adjacent[i]], @cells[src_cell[0]][src_cell[1]].getPiece.getOwner))
+                        if(!@cells[src_cell[0] +y_adjacent[i]*2][src_cell[1]+x_adjacent[i]*2].isOccupied)
                             return true
                         end
                     end
