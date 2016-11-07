@@ -27,9 +27,11 @@ class Player
                     if @board.canJump(src_coords) || @board.canMove(src_coords)
                         break
                     else 
-                        puts "That piece belongs to your opponent."
+                        puts "That piece can't move or jump."
                         Continue
                     end
+                else
+                    puts "That piece doesn't belong to you."
                 end
             else
                 if @hand.getCount() > 0
