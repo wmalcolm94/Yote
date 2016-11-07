@@ -30,6 +30,8 @@ class Game
             end
         end until isOver
         
+        puts "Player " + @player_1.getSymbol + ": " + @player_1.getHandCount.to_s
+        puts "Player " + @player_2.getSymbol + ": " + @player_2.getHandCount.to_s
         @board.printBoard
         
         if(@board.countPlayerPieces(@player_1) == 0)
